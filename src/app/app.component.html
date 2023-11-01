@@ -1,0 +1,32 @@
+<div class="container">
+  <div class="row">
+    <div class="col-lg-8">
+      <h2 style = "font-family: 'Courier New', Courier, monospace; margin-top: 1rem; margin-bottom: 1rem;">
+        Books</h2>
+      <div class="row">
+        <div *ngFor="let product of products" class="col-lg-4">
+          <app-card
+            [product]="product"
+            (addProduct)="insertProduct($event)"
+          ></app-card>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-4">
+      <h2 style = "font-family: 'Courier New', Courier, monospace; margin-top: 1rem; margin-left: 1rem;">
+        Cart</h2>
+      <ol class="list-group list-group-numbered">
+        <app-card-item
+          *ngFor="let item of cartItems"
+          [item]="item"
+          (removeFromCart) = "removeItem($event)"
+          [quantity]="itemQtyMap.get(item.ISBN)"
+          (incQuantity) = "increaseQnt($event)"
+          (decQuantity) = "decreaseQnt($event)">
+        </app-card-item>
+      </ol>
+      <h4 style = "font-family: 'Courier New', Courier, monospace; margin-top: 1rem; margin-left: 1rem;">
+        Total : Rs.{{total.toFixed(2)}}</h4>
+    </div>
+  </div>
+</div>
